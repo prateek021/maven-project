@@ -10,7 +10,7 @@ pipeline
                 git branch: 'master', url: 'https://github.com/prateek021/maven-project'
             }
         }
-        stage ( 'compile my project' )
+        stage ( 'build my project' )
         {
             steps
             {
