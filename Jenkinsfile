@@ -14,7 +14,17 @@ pipeline
         {
             steps
             {
-                  sh 'mvn package' 
+                sh 'mvn package' 
+            }
+        }
+        stage ('deploy to tomcat')
+        {
+            steps
+            {
+                sshagent(['depliy-tomcat'])
+                {
+                    sh 'scp -o StrictHostKeyChecking=no **/*.war ec2-user@3.14.148.43:/var/lib/tomcat/webapps'
+                }
             }
         }
     }
