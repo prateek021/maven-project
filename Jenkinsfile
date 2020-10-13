@@ -1,6 +1,6 @@
 pipeline
 {
-    agent any
+    agents any
     stages
     {
         stage ('scm checkout')
@@ -14,7 +14,10 @@ pipeline
         {
             steps
             {
-                sh 'sonar:sonar package'
+                withSonarQubeEnv(credentialsId: 'sonarqube-2') 
+                {
+                    sh 'sonar:sonar package'
+                }
             }
         }
     }
