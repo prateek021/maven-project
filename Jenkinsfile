@@ -14,9 +14,10 @@ pipeline
         {
             steps
             {
-               
-                    sh 'mvn sonar:sonar package'
-                
+                withSonarQubeEnv('sonarqube-2') 
+                {
+                    sh 'sonar:sonar mvn package'
+                }
             }
         }
     }
