@@ -16,7 +16,7 @@ pipeline
             {
                 withSonarQubeEnv(credentialsId: 'sonarqube-2') 
                 {
-                    sh 'sonar:sonar mvn package'
+                    sh 'mvn sonar:sonar package'
                 }
             }
         }
