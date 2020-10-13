@@ -1,30 +1,20 @@
 pipeline
 {
-    agent any
+    agents any
     stages
     {
-        stage ( 'clone from git' )
+        stage ('scm checkout')
         {
-            steps
+            steps 
             {
-                git branch: 'master', url: 'https://github.com/prateek021/maven-project'
+                git 'https://github.com/prateek021/maven-project'
             }
         }
-        stage ( 'build my project' )
+        stage ('build the project along with sonar')
         {
             steps
             {
-                sh 'mvn package' 
-            }
-        }
-        stage ('deploy to tomcat')
-        {
-            steps
-            {
-                sshagent(['depliy-tomcat'])
-                {
-                    sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@3.14.148.43:/var/lib/tomcat/webapps'
-                }
+                sh 'sonar:sonar package'
             }
         }
     }
